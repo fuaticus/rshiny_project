@@ -1,49 +1,50 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
 
-library(shiny)
 
-# Define UI for application that draws a histogram
-ui <- fluidPage(
+library(shinydashboard)
 
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
+body <- dashboardBody(
+    fluidRow(
+        box(title = "Box title", "Box content"),
+        box(status = "warning", "Box content")
+    ),
+    
+    fluidRow(
+        box(
+            title = "Title 1", width = 4, solidHeader = TRUE, status = "primary",
+            "Box content"
         ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
+        box(
+            title = "Title 2", width = 4, solidHeader = TRUE,
+            "Box content"
+        ),
+        box(
+            title = "Title 1", width = 4, solidHeader = TRUE, status = "warning",
+            "Box content"
+        )
+    ),
+    
+    fluidRow(
+        box(
+            width = 4, background = "black",
+            "A box with a solid black background"
+        ),
+        box(
+            title = "Title 5", width = 4, background = "light-blue",
+            "A box with a solid light-blue background"
+        ),
+        box(
+            title = "Title 6",width = 4, background = "maroon",
+            "A box with a solid maroon background"
         )
     )
 )
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
+# We'll save it in a variable `ui` so that we can preview it in the console
+ui <- dashboardPage(
+    dashboardHeader(title = "Row layout"),
+    dashboardSidebar(),
+    body
+)
 
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    })
-}
-
-# Run the application 
-shinyApp(ui = ui, server = server)
+# Preview the UI in the console
+shinyApp(ui = ui, server = function(input, output) { })
