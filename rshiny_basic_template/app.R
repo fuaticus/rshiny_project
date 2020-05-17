@@ -68,9 +68,26 @@ body <- dashboardBody(
             
         ),
         column(width = 9,
-            box(
-                title = "Title 6",width = 12, background = "maroon",
-                "A box with a solid maroon background")
+               gradientBox(
+                   title = "My gradient Box",
+                   width = 12,
+                   icon = "fa fa-heart",
+                   gradientColor = "maroon", 
+                   boxToolSize = "xs", 
+                   closable = TRUE,
+                   footer = "The footer goes here. You can include anything",
+                   "This is a gradient box"
+               ),
+               gradientBox(
+                   title = "My gradient Box",
+                   width = 12,
+                   icon = "fa fa-heart",
+                   gradientColor = "maroon", 
+                   boxToolSize = "xs", 
+                   closable = TRUE,
+                   footer = "The footer goes here. You can include anything",
+                   "This is a gradient box"
+               )
         )
     )
 )
